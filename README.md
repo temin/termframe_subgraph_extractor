@@ -3,15 +3,17 @@
 
 ### About
 
-This repository contains the code and web service interface for extracting subgraphs from Karst terminology graphs. It is closely linked to the **[webanno2csv](https://github.com/vpodpecan/webanno2csv)** project and specific to the **[TermFrame project](https://termframe.ff.uni-lj.si/)** project. The terminology networks used here (`services/web/networks`) are created by the webanno2csv's [convert module](https://github.com/vpodpecan/webanno2csv/blob/main/convert.py).
+This repository contains the code and web service interface for extracting subgraphs from Karst terminology graphs. It is closely linked to the **[webanno2csv](https://github.com/vpodpecan/webanno2csv)** project and specific to the **[TermFrame](https://termframe.ff.uni-lj.si/)** project. The terminology networks used here (in folder `services/web/networks`) are created by the webanno2csv [convert module](https://github.com/vpodpecan/webanno2csv/blob/main/convert.py).
 
 The web service implements two functions:
 
 - fuzzy node search (suggestions) which identifies matching node names;
 - subgraph extraction which extracts the neighbourhood of a given set of nodes.
 
+Currently, there are terminology graphs available for three languages: Slovene, Croatian, and English.
 
-### Examples
+
+### Examples of use
 
 Fuzzy node search request and result:
 
@@ -129,15 +131,13 @@ curl -X 'POST' \
 ```
 
 
-
-
 ### Requirements
 
 -  docker
 -  docker-compose
 
 
-### How to use
+### How to run
 
 #### Development
 
