@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  web:
+    container_name: subgraph_extractor_dev
+    build:
+        context: ./services/web
+        dockerfile: Dockerfile
+    command: python app.py
+    volumes:
+      - ./services/web/:/usr/src/app/
+    ports:
+      - 5000:5000
+    env_file:
+      - ./.env.dev
