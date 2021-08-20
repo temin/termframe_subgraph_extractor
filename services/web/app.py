@@ -75,6 +75,7 @@ class SubgraphExtractor(Resource):
             abort(400, 'Language parameter must be one of {en, sl, hr}')
         g = all_graphs[lang]
         subg = utils.extract_subgraph(g, api.payload['nodes'], k=2, ignoreDirection=False, fuzzySearch=False)
+        # utils.export_dot(subg, '_'.join(api.payload['nodes']))
         return utils.graph2json(subg)
 
 

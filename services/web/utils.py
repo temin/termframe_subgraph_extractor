@@ -58,3 +58,8 @@ def visualize_graphviz(g, path, output='pdf'):
     dotfile = path + '.dot'
     nx.drawing.nx_pydot.write_dot(g, dotfile)
     subprocess.call(['dot', '-T{}'.format(output), dotfile, '-o', '{}.{}'.format(path, output)])  # , cwd=outdir)
+
+
+def export_dot(g, path):
+    dotfile = path + '.dot'
+    nx.drawing.nx_pydot.write_dot(g, dotfile)
