@@ -47,7 +47,8 @@ edge_field = api.model('Edge', {
 
 extract_input = api.model('SearchInput', {
     'language': fields.String(required=True, description='language (en, sl, hr)'),
-    'nodes': fields.List(fields.String, required=True, description='list of query nodes')
+    'nodes': fields.List(fields.String, required=True, description='list of query nodes'),
+    'width': fields.Integer(required=True, default=1, description='width of the search (1,2, or 3)'),
 })
 extract_output = api.model('SearchOutput', {
     'nodes': fields.List(fields.Nested(node_field), description='node descriptions'),
@@ -71,10 +72,13 @@ class SubgraphExtractor(Resource):
     @ns.marshal_with(extract_output)
     def post(self):
         lang = api.payload['language']
+        width = int(api.payload['width'])
         if lang not in ['sl', 'en', 'hr']:
             abort(400, 'Language parameter must be one of {en, sl, hr}')
+        if not (1 <= width <= 3):
+            abort(400, 'Width parameter must be one in [1,2,3]')
         g = all_graphs[lang]
-        subg = utils.extract_subgraph(g, api.payload['nodes'], k=2, ignoreDirection=False, fuzzySearch=False)
+        subg = utils.extract_subgraph(g, api.payload['nodes'], k=width, ignoreDirection=True, fuzzySearch=True)
         # utils.export_dot(subg, '_'.join(api.payload['nodes']))
         return utils.graph2json(subg)
 
