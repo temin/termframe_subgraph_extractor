@@ -5,12 +5,16 @@
 
 This repository contains the code and web service interface for extracting subgraphs from Karst terminology graphs. It is closely linked to the **[webanno2csv](https://github.com/vpodpecan/webanno2csv)** project and specific to the **[TermFrame](https://termframe.ff.uni-lj.si/)** project. The terminology networks used here (in folder `services/web/networks`) are created by the webanno2csv [convert module](https://github.com/vpodpecan/webanno2csv/blob/main/convert.py).
 
+Currently, there are terminology graphs available for three languages: Slovene, Croatian, and English.
+
+
 The web service implements two functions:
 
 - fuzzy node search (suggestions) which identifies matching node names;
-- subgraph extraction which extracts the neighbourhood of a given set of nodes.
+- subgraph extraction which extracts the neighbourhood of a given set of nodes
 
-Currently, there are terminology graphs available for three languages: Slovene, Croatian, and English.
+Note that subgraph extraction will perform fuzzy matching by default and take the best match for each query node. Also, edge direction will be ignored while searching the neighbourhood of node(s).
+
 
 
 ### Examples of use
@@ -52,7 +56,8 @@ curl -X 'POST' \
   "language": "sl",
   "nodes": [
     "dol"
-  ]
+  ],
+  "width": 1
 }'
 ```
 
@@ -61,70 +66,50 @@ curl -X 'POST' \
   "nodes": [
     {
       "id": 1,
-      "label": "dol",
-      "group": "DEFINIENDUM"
-    },
-    {
-      "id": 2,
-      "label": "vdolbine",
-      "group": "GENUS"
-    },
-    {
-      "id": 3,
-      "label": "D.3.1 Geolocation",
-      "group": "CATEGORY"
-    },
-    {
-      "id": 4,
-      "label": "Lj . na Dinarskem krasu",
+      "label": "lj . na Dinarskem krasu",
       "group": "RELATION"
     },
     {
-      "id": 5,
+      "id": 2,
       "label": "A.1 Surface landform",
       "group": "CATEGORY"
     },
     {
-      "id": 6,
-      "label": "za različne površinske vdolbine ( suho dolino , kraško polje ) na Dinarskem krasu",
+      "id": 3,
+      "label": "za različne površinske vdolbine (suho dolino, kraško polje) na Dinarskem krasu",
       "group": "RELATION"
     },
     {
-      "id": 7,
-      "label": "D.1 Abiotic",
-      "group": "CATEGORY"
+      "id": 4,
+      "label": "vdolbine",
+      "group": "GENUS"
+    },
+    {
+      "id": 5,
+      "label": "dol",
+      "group": "DEFINIENDUM"
     }
   ],
   "edges": [
     {
       "from": 1,
       "to": 5,
-      "label": "has category"
-    },
-    {
-      "from": 1,
-      "to": 3,
-      "label": "has category"
-    },
-    {
-      "from": 1,
-      "to": 7,
-      "label": "has category"
-    },
-    {
-      "from": 1,
-      "to": 2,
-      "label": "is a"
-    },
-    {
-      "from": 1,
-      "to": 4,
       "label": "has position"
     },
     {
-      "from": 1,
-      "to": 6,
+      "from": 2,
+      "to": 5,
+      "label": "has category"
+    },
+    {
+      "from": 3,
+      "to": 5,
       "label": "defined as"
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "label": "is a"
     }
   ]
 }
