@@ -22,11 +22,11 @@ def extract_subgraph(g, nodes, k=2, ignoreDirection=False, fuzzySearch=True):
         nodes = [node for node in nodes if node in g.nodes]
 
     if ignoreDirection:
-        g = nx.Graph(g.copy())
+        ug = nx.Graph(g.copy())
     all_neighbours = set(nodes)
     fromnodes = nodes
     for i in range(k):
-        neighbours = set(itertools.chain.from_iterable([g.neighbors(node) for node in fromnodes]))  # - set(fromnodes)
+        neighbours = set(itertools.chain.from_iterable([ug.neighbors(node) for node in fromnodes]))  # - set(fromnodes)
         if not neighbours:
             break
         all_neighbours.update(neighbours)
