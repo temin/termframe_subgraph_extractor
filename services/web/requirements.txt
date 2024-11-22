@@ -6,3 +6,4 @@ networkx==2.5.1
 python-Levenshtein==0.12.2
 fuzzywuzzy==0.18.0
 pydot==1.4.2
+markupsafe==2.0.1
